@@ -1,0 +1,197 @@
+﻿
+
+Useful code....................................
+
+22.9.2016
+MOVE INSTEAD OF DESTROY
+void MoveInsideScreen(Transform obj) {
+    if (obj.position.x > 200) { // allows +-200
+        Vector3 npos = obj.position;
+        npos.x -= 300;
+        obj.position = npos;
+    }
+}
+
+void MoveOutsideScreen(Transform obj) {
+    if (obj.position.x < 290) { // allows +-290
+        Vector3 npos = obj.position;
+        npos.x += 300;
+        obj.position = npos;
+    }
+}
+
+
+SMOOTH ENGINE, non lerped, but smiliar
+[in update]
+MoveTowards(customPoint);
+transform.Translate(direction * speed);
+			
+[System.Obsolete("this way, combined with transform.Translate(direction * speed); give REALLY smooth movement. Its little smiliar to lerp, "+
+    "but better slowdown. Don't throw it away")]
+public void MoveTowards(Vector3 point) {
+        
+    direction = point - transform.position;
+    if (direction.x > 0) {
+        direction.x = 1;
+    }
+    if (direction.y > 0) {
+        direction.y = 1;
+    }
+    this.customPoint = point;
+}
+
+TODO and recap
+24.9 2016
+Add progression system for turrets. 
+[turret)ground -> click -> open menu -> [menu)click menu item -> change turret into something else
+[menu)click outside -> close menu, *--turret is also included in deselect i think--
+[turret) click turret again -> close menu
+
+21.9.2016
+
+Today I added waves, units and pathfinding
+
+For pathfinding I have 2 options, either custom paths for all possible paths or branching, more node based paths
+
+I could use system that allows one waypoint to have multiple exists that can then be chosen randomly by the unit.
+Path choice should be easy to make once unit arrives.
+
+Do i need global spawn manager? No I can spawn unit in starting wypoint and then it decides on itself where to go
+
+____________________________
+****************************
+
+20.9.2016
+Here are all details about KR
+*******************
+
+
+Towers
+
+Each tower type in KR is linked to 1 class, with humans predominating
+Human archers, dwarfs tech experts, human mages and human soldiers. Dwarfs can be considered human tho.
+
+Archers respresent projectiles
+Artilery respresents explosives
+Mages represent magic ofc
+Military represents melle
+**************************
+Lets play the game:
+
+_____________
+*******************
+Lvl 1
+Waiting for player to start.
+
+Wave 1: 3x goblins
+Helper screen displays, showing short description about new unit
+You can call next wave early
+Achievemnt, first blood, lol reference
+
+Wave 2: 6 goblins?
+Goblins spawn with time distance
+
+Wave 3: 12 goblins?
+Explains skill, reinforce, gives you 2 units
+You can place them only on path. Its accesible with shortcut 1
+
+Wave 4: Goblin 4x, 1x orc
+There was larger delay between goblins and orc.
+Easy to clear goblins, then introduce orc
+
+Wave 5: 3x orcs
+Hint how to counter armor, what is armor good against
+Wave 6: mix or orcs and goblins
+Groups of same enemies spawn in same group
+
+Wave 7: 16 goblins
+How to cope with large numbers - seconds, meteor skill
+You can spawn next wave immediatly after wave ends.
+Start and end of wave have small delays
+Skills can be canceled by clicking their icon again.
+Skill works as Select skill(skill mode)-> Place skill || Cancel skill
+
+End:  visctory screen with continue and ----------------
+Continue goes on map, where you gain skills based on amount of stars you got in level.
+
+Upgrade screen has multiple upgrade paths:
+Archer
+return 90% cost, for repositioning
+increase range, sell less often
+
+Military
+increase hp, last longer,->more damage
+add armor to units, last longer -> more damage
+
+Mage
+increase range, more shots
+break armor, solidfy mage as support unit
+
+Artilery
+increase damage, better clear
+range, increase support over barracks
+
+Meteor skill
+2 more meteors and more damage, last longer and more damge
+burn ground for 5 secs, last longer, more damage
+
+Reinforce skill
+last longer on field, more health, more damage, replacement for militia
+more hp, more dmg, costly
+__________
+********************
+Lvl 2:
+Unlock level 2 on all towers
+Background: large corn fields, for army?
+Start gold: 220
+
+Wave 1: Goblin 20x
+You can see incoming wave by hovering over send wave. First wave has stopped timer at 0.
+Also next wave button scales up and down
+Shows how to handle large numbers of enemies by utilizing military
+Archer can take out 3 goblins in 1 U turn
+Wave 2:  24 goblins
+Need artilery on top of barracks
+Soldiers are as weak as goblins, 1-3atk
+Reinforce can take out about 4-5 goblins
+
+Wave 3: 6 wolves?
+Introduce fast units
+
+Wave 4: ? goblins- wolves?
+
+Wave 5: 6 orcs, 20 goblins
+
+Wave 6: orcs and wolves
+together with wave 4 and 5, different compinations of units
+
+Wave 7: all 3 new units together 10 orcs, 20 goblins, 10 wolves
+Heavy>regular>fast
+Wolves also introduce beast monsters
+You can clear them out with meteor
+This is end of level 2. EW got 1 new unit, and learned how to handle combinations of units
+
+______________
+*******************
+Conclusion on wave 1-2, before going to lol
+Most important pieces of game, to watch for, are combination of enemies and correct use of timings in waves.
+
+________________
+Level 3
+Focus on building system
+Ok so before I start, building poles have shadows
+Hovering over building location will highlight it with handpainted yellow outline
+Clicking it display build UI. it has 4 options. its custom made for 4 items, with diferent options.
+Menu is of a square shape.
+Clicking it again, closes ui and dehighlits it.
+that build bar is the same for all, just different button placement
+*******************
+
+Goblins have low hp and average speed.
+20hp, 1-4 atk, armor:none, lives taken=1
+
+Orcs have light armor and slow speed
+
+Wolves can dodge military attacks, low hp, "very" high speed
+*regular minions -> regular heavy units -> regular fast unit
+1-3 atk, like military

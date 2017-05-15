@@ -1,0 +1,110 @@
+﻿
+This file contains information about spaceships and guns in game, from setup to behaviour
+
+
+2d art measurements
+___________________________________________________________
+***********************************************************
+Pixel size
+Carrier: ~500x260, tiles: 8px -> 65 units x 35 units
+
+Image size
+Carrier: 512x317
+
+
+
+___________________________________________________________
+***********************************************************
+Lore
+___________________________________________________________
+***********************************************************
+OSD assault craft
+
+OSD craft or one sided destroyed crraft is medium-small sized fire support craft that attack by making fast approach horizontal on target. They avoid 
+guns with speed or simply draw fire from smaller units whileputting all the guns on 1 side in full salvo. Once out of range it makes U turn and repeats, 
+keeping guns on same side.
+
+Vulnerable to fighter attacks from other side.
+
+Pilot training(attack behaviour):
+1. fly horizontaly on target's broadside and shoot with all cannons
+2. continue forward until out of range
+3. make U-turn and repeat. add 1 gun to the side of attacking from the other side
+
+Stats:
+Standard engine
+Engine power=1
+Mobility = 3.69
+
+Weaponery:
+- light cannons, that can be moved from 1 side to other in matter of minutes
+- storage, troop weapons
+
+Backstory:
+Usualy they are used to transport land troops to provide safe landing. They are extremply durable so their Ai manned versions are sometimes 
+used as shield in private armies, like for example with for rich merchant protection. They also have relativly big interior which can be used as storage 
+or labyrinth to suppress mutiny or opposing boarding parties. 
+
+Their Ai-manned versions can also be used to ram enemy ships from two sides, squashing it into a pulp.
+
+Popular name: Small deadly turtle, named after sturdiness of its armor, while lacking any real punch
+
+Created: 14.08.2016
+___________________________________________________________
+***********************************************************
+Piloted fighter craft
+
+Stats:
+Fueled engine
+Power = 200
+Mobility = 3
+
+___________________________________________________________
+***********************************************************
+Suicide bomber
+
+Stats:
+Standard engine
+power = 0.75
+Mobility = 1
+
+___________________________________________________________
+***********************************************************
+Light Directional Rocket model
+
+LDR models are used by fighters and light rocket towers for destruction of stationary targets, hull damage or getting rid of groups of robotic fighers. They have extremly high burst rate which also makes them 
+ideal in space, for use on large targets with anti laser towers.
+
+Newer models also have stabilizers that allows them to fly in straight line in air, which allows fighters touse them on stationary ground targets.
+
+
+Light directional rocket  - LDR 2
+
+LDR 2 is a simple rocket model, with included air-to-land stabilizers, which allows it to fly in atmosphere. LDR 1 was originaly used only for space, but was modified by pirates when they attacked planets with atmosphere.
+Eventualy, this was adopted into the military schematics as a standard to improve weapon capabilities all fighter crafts. LDR 2 WILL NOT witstand atmosphere entrance burn, so it cannot be used for space-planet bombardment.
+
+Description:
+This model has no tracking system, which makes it useless on experienced fighters, but they are effective versus robotic groups and large enemies. They compensate for lack of tracking with high acceleration, and high explosion radius.
+It's ideal for groups of robotic enemies and for weaker structures grouped together. Because of their speed they can even bypass anti laser towers.
+
+
+___________________________________________________________
+***********************************************************
+Bullets
+
+Standard bullets
+
+Stats:
+no movement = false
+speed = 7
+damage = 1
+
+Laser bullets
+
+Stats:
+no movement = false
+speed = 100
+damage = 2
+
+___________________________________________________________
+***********************************************************

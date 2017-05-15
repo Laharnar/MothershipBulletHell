@@ -1,0 +1,58 @@
+﻿This file explains all connections between layers.
+
+Layers:
+- Spaceship
+- Detecton
+- Collision Detection
+- Navigation
+- Selection
+
+************************
+Spaceship layer
+This layer is for object with spaceship's main collider, the non trigger one.
+
+Possible interactions:
+Spaceship
+Detection
+All
+
+*******************
+Detection layer
+This layer is for objects that require detection optimization. It could be spaceship layer, but for sake
+of clearance it's a seprate layer.
+Edit 4.9.2016
+Assign this layer to gun ranges and ships detection range, so they can detect each other.
+Edit 9.9.2016
+Combine this layer and collision detection layer for target finding.
+
+
+Possible interactions:
+Spaceship
+Detection
+Collision Detection
+**********************
+Collision Detection layer
+This layer is for ships, to be able to collide with projectiles or other ships
+Assign it to ships child colliders.
+
+Possible interactions:
+Detection
+Projectile
+
+**********************
+Selection layer
+This layer is used only on selectable subobjects. They don't collide or trigger anything, only allow use of Raycasting and OverlapAreaAll.
+
+Possible interactions:
+NONE(accept Physics2D.Raycast)
+
+*******************
+Navigation layer
+Layers for waypoints and waypoints detection, designed for spaceships manevuers.
+
+Put 1 layer end on spaceship's child navigation collider and other on a waypoint.
+Set these colliders on triggers
+
+Possible interactions:
+Navigation layer
+********************

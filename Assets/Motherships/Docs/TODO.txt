@@ -1,0 +1,33 @@
+﻿01.05.2017
+Project restart!
+- check and rebuild gun logic
+- check and rebuild projectile logic
+- check and rebuild ai logic
+- check and rebuild ship logic
+- add turn on - turn off buttons for parts of game, for testing
+
+
+15.9.2016
+Added implementation of formation movement with minion-based model where minions copy change in leaders movement and rotation.
+
+Warp gates can detect when units enter and exit.
+
+Engines now have another base layer with completly basic translation forward.
+Standard engines now allow 100% startup in instantiation. Useful for exiting from warp gates
+
+You can have engine track their position and rotation changes.
+
+16.9.2016
+
+Todo:
+When exit warp gate, units should appear and their actual engines should start working. if minions come out first, they still copy the leader.
+
+Leader based enable-disable engine should be used with all types of engines.
+
+Make spawner editor that creates entire level from predefined formation choice of empties based on their sizes.
+Spawner should allows randomization of position by steps.
+
+Make parser that allows string based waves. This is big task, break it down more, like how are formation prefabs kept and tagged
+
+
+DevMakeLeader is probably broken in this new version

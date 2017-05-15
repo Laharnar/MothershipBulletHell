@@ -1,0 +1,73 @@
+﻿player spaceship 
+wasd
+fly up
+constant shoot
+pickups - 3 verzije shutiranja
+grey bullets 
+single line
+triple line
+7 line
+
+blue laser
+single line
+double forward
+extra fat
+
+red rockets
+single line homing
+double forward hominh
+quadra 2 forward 2 side homing
+
+enemies
+fly levo desno nč
+rotate constantly
+rotate startup
+
+shoot
+rotate constantly
+rotate startup
+
+kvadrat
+rumen
+stand still
+
+trikotnik
+oranžen
+iz strani na drugo stran
+
+petkotnik
+zelen
+strelanje foward
+rotira stand still
+
+šestkotnik
+moder
+stand still 
+strel forward rotiran na 45 stopinj
+
+sestkotnik
+temno moder
+strel forward, rotate by 45 every second
+
+trikotnik
+rdeč
+still, rotate by 90
+shoot in 3 sides
+
+
+background
+black background with shiny start or clouds
+triple moving depth
+
+level
+gold reward
+
+upgrades
+10 ship speed - revertable
+10 hp - revertable
+10 fire power
+
+sound
+pew pew
+
+
