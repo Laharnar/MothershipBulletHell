@@ -4,7 +4,12 @@ This game is a combination of bullet hell space shooter and a bit of RTS with AI
 
 In this project there are 2 bigger separate projects and few smaller that I tried to put together and failed(second attempt at this project). Now i'm reworking the whole thing so the whole project structure is a bit messy.
 
-Projects:
+Here are all the projects listed:
+- Motherships
+- Space shooter
+- Simulation of movement in space
+- Tower defence
+
 ## Motherships
 Some stuff is under /Assets/Motherships/, but this project is really not organized because it's the main project where i'm putting code together.
 Sprites are under /Assets/Motherships/Sprites
@@ -25,7 +30,7 @@ Building platform is the grey square. Select it and build laser cannon on it.
 You DO NOT move the ship around.
 
 
-## basic space shooter with a few levels
+## Space shooter with a few levels
 /Assets/SimpleSpaceShooter
 Second bigger project in this 1, experimented with space shooter made of basic shapes.
 Levels are fully working. /Assets/SimpleSpaceShooter/Levels/
@@ -37,12 +42,12 @@ move with mouse
 shoot by holding space
 
 
-## some "realistic" space movement simulation
+## Simulation of movement in space
 /Assets/TotalyAccurateBattleSim/
 Contains ship movement based on simulation of engines in space instead of regular movement.
 Also contains ai that dymanicaly moves in formations.
 - broken movement
 
-## basic tower defense
+## Basic tower defense
 Only 1 working level, /Assets/SimpleTD/Scenes/demo
 Building system, wave system and some pathfinding with waypoints.
