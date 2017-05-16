@@ -1,9 +1,11 @@
+# Mothership-BulletHell
+
 This game is a combination of bullet hell space shooter and a bit of RTS with AI.
 
 In this project there are 2 bigger separate projects and few smaller that I tried to put together and failed(second attempt at this project). Now i'm reworking the whole thing so the whole project structure is a bit messy.
 
 Projects:
-## Motherships and bullet hell
+## Motherships
 Some stuff is under /Assets/Motherships/, but this project is really not organized because it's the main project where i'm putting code together.
 Sprites are under /Assets/Motherships/Sprites
 Only real level with proper gameplay for now is scene "Level0". I'm rewriting some code now so a few things might not work properly. A working demo for older version is on dropbox: https://www.dropbox.com/s/u9ogu5z3mlo50ik/MothershipHell_FirstTestLevel_SecondFeedback_23_08_2016.rar?dl=0
