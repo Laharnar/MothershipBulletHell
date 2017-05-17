@@ -11,8 +11,10 @@ Here are all the projects listed:
 - Tower defence
 
 ## Motherships
-Some stuff is under /Assets/Motherships/, but this project is really not organized because it's the main project where i'm putting code together.
+Some stuff is under /Assets/Motherships/, but ~~this project is really not organized because~~ it's the main project where i'm putting code together.
+
 Sprites are under /Assets/Motherships/Sprites
+
 Only real level with proper gameplay for now is scene "Level0". I'm rewriting some code now so a few things might not work properly. A working demo for older version is on dropbox: https://www.dropbox.com/s/u9ogu5z3mlo50ik/MothershipHell_FirstTestLevel_SecondFeedback_23_08_2016.rar?dl=0
 
 Gameplay for the game on dropbox link:
