@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
-public partial class HpControl : DamageCollision {
-
+public class HpControlTemp : DamageCollision {
     public float maxHp;
     public float armor = 0; // how many % is damage reduced
     public float maxShields = 0; // energy shield pts
@@ -14,78 +14,73 @@ public partial class HpControl : DamageCollision {
 
     public bool destroyWhenHpIsZero = true;
     public bool destroyHitEnemies = false;
+    public Action beforeDestroyed;
+
+    public UnitInfo info;
 
     // just to trigger hp bar update?
-    internal void UpdateHp()
-    {
+    internal void UpdateHp() {
         hp = hp;
     }
 
-    public float maxHealth { get { return maxHp; } }
-
-    public float hp
-    {
+    public float hp {
         get { return _hp; }
-        set
-        {
-            _hp = Mathf.Clamp(value, 0, maxHealth);
+        set {
+            _hp = Mathf.Clamp(value, 0, maxHp);
             HpUpdate();
-            if (_hp > 0)
-            {
+            if (_hp > 0) {
                 return;
             }
             HpZero();
-            if (destroyWhenHpIsZero)
-            {
+            if (beforeDestroyed != null) {
+                beforeDestroyed();
+            }
+            if (destroyWhenHpIsZero) {
                 Destroy(gameObject);
             }
         }
     }
 
     public float shield {
-        get
-        {
+        get {
             return _shield;
         }
-        set
-        {
+        set {
             _shield = Mathf.Clamp(value, 0, maxShields);
             ShieldUpdate();
         }
     }
 
-    protected void Start()
-    {
+    protected void Start() {
+        //base.Start();
         Init();
     }
 
     public void Init() {
-        base.Start();
-
+        // old
         if (info && info.Get<SimpleUnit>()) {
-            
             info.GetLast<SimpleUnit>().useMovement = true;
             info.GetLast<SimpleUnit>().useRotation = true;
         }
+
         hp = maxHp;
         shield = maxShields;
     }
 
     [System.Obsolete("Remove, check is done in hp's property")]
-    protected virtual void DestroyedCheck()
-    {
-        if (hp == 0 && destroyWhenHpIsZero)
-        {
+    protected virtual void DestroyedCheck() {
+        if (hp == 0 && destroyWhenHpIsZero) {
+            // old
             if (info.Get<SimpleUnit>()) {
                 info.GetLast<SimpleUnit>().useMovement = false;
-                info.GetLast<SimpleUnit>().useRotation= false;
+                info.GetLast<SimpleUnit>().useRotation = false;
             }
+
             Destroy(gameObject, InstancePool.PoolingMode.Move);
         }
     }
 
-    internal void Damage(int damage, bool applyArmor = true)
-    {
+    internal void Damage(int damage, bool applyArmor = true) {
         armor = Mathf.Clamp(armor, 0, 1);
 
         // get actual dmg left after shields
@@ -94,7 +89,7 @@ public partial class HpControl : DamageCollision {
         float hpDmg = shieldsLeft < 0 ? -shieldsLeft : 0;
 
         shield -= shieldsDmg;
-        hp -= hpDmg * (1-_armor);
+        hp -= hpDmg * (1 - _armor);
     }
 
     internal void Heal(int amount) {
@@ -106,5 +101,31 @@ public partial class HpControl : DamageCollision {
     protected virtual void HpUpdate() { }
 
     protected virtual void ShieldUpdate() { }
+}
 
+public class GroupUnitControl : HpControlTemp {
+
+    public GroupControl central;
+    public bool msgCentralOnDestroyed = false;
+
+    // which objects can get managed by the central
+    public MonoBehaviour[] managed;
+
+    protected new void Awake() {
+        base.Awake();
+
+        if (central)
+            central.Register(this);
+    }
+
+    protected override void HpZero() {
+        if (central && msgCentralOnDestroyed)
+            central.OnMemberDestroyed(this);
+
+        base.HpZero();
+    }
+
+    public override void OnCollideEnemyFaction(ProxyCollision other) {
+        base.OnCollideEnemyFaction(other);
+    } 
 }

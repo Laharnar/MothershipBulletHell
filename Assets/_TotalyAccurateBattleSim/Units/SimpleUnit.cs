@@ -69,10 +69,12 @@ public class SimpleUnit : MonoBehaviour {
 
 
     private float _moveToVertical = 0;
-    private float moveToVertical
+    /// <summary>
+    /// -1 to 1, how much forward it will move.
+    /// </summary>
+    private float targetMoveToVertical
     {
-        get
-        { return _moveToVertical; }
+        get { return _moveToVertical; }
         set
         {
             engines["goingForward"] = value > 0;
@@ -81,6 +83,9 @@ public class SimpleUnit : MonoBehaviour {
     }
 
     float _horizontal;
+    /// <summary>
+    /// -1 to 1, rotation left and right.
+    /// </summary>
     float horizontal
     {
         get { return _horizontal; }
@@ -100,8 +105,8 @@ public class SimpleUnit : MonoBehaviour {
         get { return _vertical; }
         set
         {
-            engines["acceleratingForward"] = value < moveToVertical;
-            engines["decceleratingForward"] = value > moveToVertical;
+            engines["acceleratingForward"] = value < targetMoveToVertical;
+            engines["decceleratingForward"] = value > targetMoveToVertical;
             engines["areAllOff"] = !engines["goingForward"] && !engines["goingLeft"] && !engines["goingRight"];
             _vertical = value;
         }
@@ -145,10 +150,12 @@ public class SimpleUnit : MonoBehaviour {
         nonModifiedSteering = steering;
 
         StartCoroutine(RotationLerp());
-        StartCoroutine(MovementLerp());
+        StartCoroutine(InterpolateVerticalLoop());
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Executes rotation and movement
+    /// </summary>
     void Update () {
         fullPossibleMove = new Vector3(0, vertical) * Time.deltaTime * nonModifiedSpeed;
         fullPossibleRotation = new Vector3(0, 0, horizontal) * Time.deltaTime * nonModifiedSteering;
@@ -180,7 +187,7 @@ public class SimpleUnit : MonoBehaviour {
         if (resetMovement)
         {
             if (instantlyResetMove) vertical = 0;
-            moveToVertical = 0;
+            targetMoveToVertical = 0;
             movementState = "idle";
         }
         // rotation reset
@@ -240,7 +247,7 @@ public class SimpleUnit : MonoBehaviour {
         {
             vertical = 0;
         }
-        moveToVertical = vdir;
+        targetMoveToVertical = vdir;
     }
 
     public void Forward(bool overrideRotation = false, bool stopWhenDone = false, bool resetFirst = false)
@@ -308,24 +315,27 @@ public class SimpleUnit : MonoBehaviour {
     }
 
 
-    IEnumerator MovementLerp(float moveToVert = 0)
+    IEnumerator InterpolateVerticalLoop(float startingMove = 0)
     {
-        moveToVertical = moveToVert;
+        targetMoveToVertical = startingMove;
         while (true)
         {
+            // calculate in how many steps should rotation occur 
             float vtime = ((vertical + 1) / 2) * acceleration;
-
-            float i = 0.0f;
+            
+            // lerp the vertical value over time
+            float time = 0.0f;
             float rate = 1.0f / vtime;
             float startValue = vertical;
-            float lastMoveTo = moveToVertical;
-            while (i < 1.0)
+            float lastMoveTo = targetMoveToVertical;
+            while (time < 1.0)
             {
-                if (lastMoveTo != moveToVertical)
+                // don't count rotations if they are the same
+                if (lastMoveTo != targetMoveToVertical)
                     break;
 
-                i += Time.deltaTime * rate;
-                vertical = Mathf.Lerp(startValue, moveToVertical, i);
+                time += Time.deltaTime * rate;
+                vertical = Mathf.Lerp(startValue, targetMoveToVertical, time);
 
                 yield return null;
             }

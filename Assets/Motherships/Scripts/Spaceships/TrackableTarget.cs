@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Registers object as a target that can be searched.
+/// </summary>
+[System.Obsolete("Use TargetableBase instead")]
 public class TrackableTarget : MonoBehaviour {
-
     public bool allowNull = false;
 
     /// <summary>
@@ -13,7 +16,7 @@ public class TrackableTarget : MonoBehaviour {
     /// <summary>
     /// This defines who many guns at maximum should follow this target.
     /// </summary>
-    public int targetingPriority;
+    public int targetingPriority=1;
 
     void Awake() {
         if (!allowNull && shipSource == null) {

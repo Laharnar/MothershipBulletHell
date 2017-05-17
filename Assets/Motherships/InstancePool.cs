@@ -31,6 +31,7 @@ public class InstancePool {
     }
 
     public static Transform CreateUnit(Transform pref, PoolingMode mode) {
+        Debug.Log(pool+ " "+pref);
         if (!pool.ContainsKey(pref.name)) {
             pool.Add(pref.name, new StackOfInstances());
         }

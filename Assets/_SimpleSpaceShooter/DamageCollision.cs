@@ -4,10 +4,12 @@ using System.Collections;
 /// <summary>
 /// Put this script on things that apply damage on collision
 /// </summary>
+[System.Obsolete("Rework this collision, don't derive hp control from it")]
+// lot of pointless code to allow proxied collisions in central arhitecture.
 public class DamageCollision : CollisionReceiver {
 
     public int heal = 0;
-    public int damage = 1;
+    public int giveCollideDamage = 1;
 
     public bool destroyOnAllyCollision = false;
     public bool destroyOnEnemyCollision = false;
@@ -46,7 +48,7 @@ public class DamageCollision : CollisionReceiver {
         if (other.useCallback)
         if ( applyTo.info) {
             if (applyTo.info.Get<HpControl>(typeof(GroupUnitControl))) {
-                applyTo.info.GetLast<HpControl>().Damage(damage);
+                applyTo.info.GetLast<HpControl>().Damage(giveCollideDamage);
             }
         } else if (!applyTo.intentionalNoInfo) Debug.Log("No info is assigned.", applyTo);
 
@@ -59,7 +61,7 @@ public class DamageCollision : CollisionReceiver {
         if ( applyTo.info) {
             // in case bullet has hp
             if (applyTo.info.Get<HpControl>(typeof(GroupUnitControl))) {
-                applyTo.info.GetLast<HpControl>().Damage(damage);
+                applyTo.info.GetLast<HpControl>().Damage(giveCollideDamage);
             }
         } else if (!applyTo.intentionalNoInfo) Debug.Log("No info is assigned.", applyTo);
         if (destroyOnProjectileCollision) Destroy(gameObject);

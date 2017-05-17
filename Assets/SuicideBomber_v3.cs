@@ -128,12 +128,14 @@ public class SuicideBomber_v3 : AiBase {
 	}
 }
 
-
+/// <summary>
+/// Uses TargatableBase to find targets in scene.
+/// </summary>
 static class SearchManager {
     internal static UnitInfo ClosestEnemyUnit(UnitInfo info, string alliance) {
-        UnitInfo[] t = new UnitInfo[AiBase.allAi.Count];
+        UnitInfo[] t = new UnitInfo[TargetableBase.allTargets.Count];
         int i = 0;
-        foreach (var item in AiBase.allAi) {
+        foreach (var item in TargetableBase.allTargets) {
             for (int j = 0; j < item.Value.Count; j++) {
                 t[i] = item.Value[j];
                 i++;
@@ -149,8 +151,8 @@ static class SearchManager {
         for (int i = 0; i < objs.Length; i++) {
             if (objs[i] == unit) continue;
             // filter same alliances
-            if (objs[i].Get<AiBase>()) {
-                if (objs[i].GetLast<AiBase>().initAlliance == alliance)
+            if (objs[i].Get<TargetableBase>()) {
+                if (objs[i].GetLast<TargetableBase>().initAlliance == alliance)
                 continue;
             }
 
